@@ -27,4 +27,17 @@ public class CategoryService {
             return category;
     }
 
+    public Optional<Category> obtenerCatogoriaPorNombre(String categoryName){
+        Optional<Category> category = categoryRepository.findByCategoryname(categoryName);
+        if(category.isEmpty())
+            return  Optional.empty();
+        else
+            return category;
+    }
+
+    public List<Category> obtenerCategoriasPorFiltro(String filtro){
+        return categoryRepository.filtrarCategoriasPorNombreSQL(filtro);
+    }
+
+
 }

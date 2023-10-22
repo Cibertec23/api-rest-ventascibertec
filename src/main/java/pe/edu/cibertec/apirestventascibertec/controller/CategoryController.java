@@ -39,6 +39,32 @@ public class CategoryController {
 
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
+
+    /*@GetMapping("/categoryname/{categoryname}")
+    public ResponseEntity<Category> obtenerCategoriaPorNombre(
+            @PathVariable("categoryname") String categoryName){
+        Category category = categoryService
+                .obtenerCatogoriaPorNombre(categoryName)
+                .orElseThrow(() -> new ResourceNotFoundException("La categoria con el nombre "+
+                        categoryName + " no existe."));
+
+        return new ResponseEntity<>(category, HttpStatus.OK);
+    }*/
+
+    @GetMapping("/categoryname/{filtro}")
+    public ResponseEntity<List<Category>> filtrarCategoriasPorNombre(
+            @PathVariable("filtro") String filtro
+    ){
+        List<Category> categoryList = new ArrayList<>();
+        categoryService.obtenerCategoriasPorFiltro(filtro)
+                .forEach(categoryList::add);
+        if(categoryList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(categoryList, HttpStatus.OK);
+    }
+
+
     @PostMapping("")
     public ResponseEntity<Category> registrarCategoria(
             @RequestBody Category category
