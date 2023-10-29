@@ -11,12 +11,15 @@ import pe.edu.cibertec.apirestventascibertec.service.CategoryService;
 import java.util.ArrayList;
 import java.util.List;
 
+//@CrossOrigin(origins = {"https://cibertec.blackboard.com", "https://intranet.cibertec.edu.pe"})
+//@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
 @AllArgsConstructor
 @RestController
 @RequestMapping(path = "api/v1/category")
 public class CategoryController {
 
     private CategoryService categoryService;
+
 
     @GetMapping("")
     public ResponseEntity<List<Category>> listarCategorias(){
