@@ -31,6 +31,7 @@ public class FiltroJWTAutorizacion extends OncePerRequestFilter {
             }else {
                 SecurityContextHolder.clearContext();
             }
+            filterChain.doFilter(request, response);
         }catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException ex){
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             ((HttpServletResponse)response).sendError(
